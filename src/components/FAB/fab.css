@@ -1,0 +1,47 @@
+.floating-action-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: self-end;
+}
+
+button {
+  background-color: white;
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  padding: 4px;
+  color: #f8f8f8;
+  box-shadow: 1px 1px 8px 0px #00000080;
+
+  animation-timing-function: ease-in-out;
+  animation-duration: 300ms;
+}
+
+.floating-action-button span span {
+  background-color: #f8f8f8;
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: center;
+
+  width: 180px;
+  height: 34px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  gap: 8px;
+  margin-right: 15px;
+
+  border: 1px solid #cccccc;
+
+  box-shadow: 1px 1px 8px 0px #00000080;
+}
+
+.floating-action-button span {
+  margin-top: 20px;
+}
