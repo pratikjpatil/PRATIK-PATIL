@@ -8,14 +8,13 @@ function AnswerCard() {
 
   return (
     <div className="answer-card">
-      
 
-      <div className="answer-header">
-        <div className="user-profile">
+      <div className="answer_card-header">
+        <div className="answer_card-user-profile">
           <img src={profile} alt="profile" />
           <div>
             <span>
-                <span className='user-name'>Neha Bhat</span>
+                <span className='answer_card-user-name'>Neha Bhat</span>
                (You)  
             </span>
             
@@ -24,7 +23,7 @@ function AnswerCard() {
 
         </div>
 
-        <div className="edit-button">
+        <div className="answer_card-edit-button">
           <img src={edit} alt="edit" />
           <span>Edit</span>
         </div>
@@ -32,19 +31,19 @@ function AnswerCard() {
 
 
 
-      <p className="answer-content">
+      <p className="answer_card-answer-content">
       Lorem ipsum dolor sit amet consectetur. Elit et ut at vestibulum enim ornare feugi vitae. Eget proin aliquam blandit eget vitae erat fermentum lacus. Dignissim done mi vel fermentum. Id ultrices risus sit pel sit elit morbi. Mi sed mauris aenean odio egestas ullamcorper. Dignissim in vel fusce id. Sit blandit diam ridiculus ipsum interdum ut velit quam. Bibendum amet mi.... 
       <span>Show more</span>
       </p>
 
-      <div className="answer-card-footer">
+      <div className="answer_card-footer">
         <span>
           <img src={like} alt="like" />
           Like
         </span>
         <span>
           <img src={comment} alt="comment" />
-          <input type="text" name="comment" placeholder='Add a comment' className='comment-input'/>
+          <input type="text" name="comment" placeholder='Add a comment' className='answer_card-comment-input'/>
         </span>
         <button>Post</button>
       </div>

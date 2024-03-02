@@ -1,8 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./fabCards.css";
 
-function Feedback() {
+function Feedback({ data, setData }) {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isdataValid, setIsdataValid] = useState(true);
+
+  const isLoggedIn = false;
+
+  useEffect(() => {
+    const allValuesNotEmpty = Object.values(data).every(
+      (value) => value !== ""
+    );
+    setIsdataValid(allValuesNotEmpty);
+  }, [data]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -18,27 +28,34 @@ function Feedback() {
   const clearSelectedImage = () => {
     setSelectedImage(null);
   };
-  const isLoggedIn = true;
+
+  const handleDataChange = (e) => {
+    const { name, value } = e.target;
+    setData((prev) => ({ ...prev, [name]: value }));
+  };
+
   return (
-    <div className="card-container">
-      <div className="card-title">
+    <div className="fab_cards-card-container">
+      <div className="fab_cards-card-title">
         <h4>
           Let us know your <span>Feedback</span> about us!
         </h4>
       </div>
-      <form className="action-card-form" action="">
-        <div className="action-card-query-box">
+      <form className="fab_cards-form" action="">
+        <div className="fab_cards-query-box">
           <textarea
-            className="action-card-input query-input"
+            className="fab_cards-input query-input"
             style={{ border: "none" }}
             name="query"
             placeholder="Write here..."
             required
             rows="4"
+            value={data.query}
+            onChange={handleDataChange}
           ></textarea>
 
-          <div className="file-attach">
-            <label htmlFor="file-input" className="file-attach-button">
+          <div className="fab_cards-file-attach">
+            <label htmlFor="file-input" className="fab_cards-file-attach-button">
               <svg
                 style={{ marginRight: "5px" }}
                 width="11"
@@ -61,30 +78,29 @@ function Feedback() {
               />
             </label>
             {selectedImage && (
-              <div className="selected-img-container">
+              <div className="fab_cards-selected-img-container">
                 <img
                   src={selectedImage}
                   alt="Selected"
-                  className="selected-img"
+                  className="fab_cards-selected-img"
                 />
-                  <svg
-                  className="img-close-button"
+                <svg
+                  className="fab_cards-img-close-button"
                   onClick={clearSelectedImage}
-                    width="12"
-                    height="12"
-                    viewBox="0 0 10 10"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M1.66675 1.66675L8.33341 8.33341M1.66675 8.33341L8.33341 1.66675"
-                      stroke="white"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                
+                  width="12"
+                  height="12"
+                  viewBox="0 0 10 10"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1.66675 1.66675L8.33341 8.33341M1.66675 8.33341L8.33341 1.66675"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </div>
             )}
           </div>
@@ -100,33 +116,42 @@ function Feedback() {
                 marginTop: "0px",
               }}
               type="checkbox"
-              name="check"
+              name="checkForAnonymous"
               id="check"
-              placeholder="Enter your Email"
+              value={data.checkForAnonymous}
+              onChange={handleDataChange}
               required
             />
-            <label className="action-card-input-label" htmlFor="check">
+            <label className="fab_cards-input-label" htmlFor="check">
               Send feedback anonymously
             </label>
           </div>
         ) : (
           <span>
-            <label className="action-card-input-label" htmlFor="email">
+            <label className="fab_cards-input-label" htmlFor="email">
               Enter your email to receive an update
-              <span className="required-field">*</span>
+              <span className="fab_cards-required-field">*</span>
             </label>
             <input
-              className="action-card-input"
+              className="fab_cards-input"
               style={{ backgroundColor: "white" }}
               type="email"
               name="email"
               placeholder="Enter your Email"
               required
+              value={data.email}
+              onChange={handleDataChange}
             />
           </span>
         )}
 
-        <button className="action-card-submit-button" type="submit">
+        <button
+          className={`fab_cards-submit-button ${
+            isdataValid ? "submittable" : ""
+          }`}
+          type="submit"
+          disabled={!isdataValid}
+        >
           Submit
         </button>
       </form>

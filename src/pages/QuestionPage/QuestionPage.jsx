@@ -8,21 +8,21 @@ function QuestionPage() {
   return (
     <div>
     <Navbar/>
-    <section className="main-section">
-    <div className='back-button'>
+    <section className="questionspage-main-section">
+    <div className='questionspage-back-button'>
       <img src={backArrow} alt="back" />
       Back to Questions
     </div>
 
-    <div className='content-container'>
+    <div className='questionspage-content-container'>
       <QuestionCard/>
 
-      <div className='answers'>
-        <div className='answers-head'>
+      <div className='questionspage-answers'>
+        <div className='questionspage-answers-head'>
           <span>Answers (23)</span>
           <div>
             Sort By: 
-            <select name="sort" className='sort-dropdown'>
+            <select name="sort" className='questionspage-sort-dropdown'>
               <option value="Popular">Popular</option>
             </select>
 

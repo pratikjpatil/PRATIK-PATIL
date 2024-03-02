@@ -3,7 +3,7 @@ import profileImage from "../../assets/profile.png";
 function Navbar() {
   return (
     <div className="navbar-container">
-      <h3 className="logo-text">
+      <h3 className="navbar-logo-text">
         THE &nbsp;<span>PRODUCT</span>&nbsp;PLATFORM
       </h3>
       <div className="navbar-menu">

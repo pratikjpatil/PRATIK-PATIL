@@ -4,13 +4,13 @@
   height: 300px;
   padding: 16px 32px;
   border-radius: 6px;
-  border: 0.4px;
+  border: 0.answer_card-4px;
   gap: 16px;
   background-color: #DEE7FF;
   ;
 }
 
-.answer-header {
+.answer_card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -22,21 +22,21 @@
   text-align: left;
 }
 
-.user-profile {
+.answer_card-user-profile {
   display: flex;
 }
 
-.user-profile img{
+.answer_card-user-profile img{
     width: 60px;
 }
 
-.user-profile div {
+.answer_card-user-profile div {
   display: flex;
   flex-direction: column;
   margin-left: 15px;
 }
 
-.user-name {
+.answer_card-user-name {
   font-family: "Poppins", sans-serif;
   font-size: 20px;
   font-weight: 700;
@@ -45,7 +45,7 @@
   text-align: left;
 }
 
-.edit-button {
+.answer_card-edit-button {
   display: flex;
   align-items: center;
   font-family: "Poppins", sans-serif;
@@ -56,12 +56,12 @@
   text-align: left;
 }
 
-.edit-button img {
+.answer_card-edit-button img {
   height: 25px;
   width: 25px;
   margin-right: 15px;
 }
-.answer-content {
+.answer_card-answer-content {
   font-family: "Poppins", sans-serif;
   font-size: 18px;
   font-weight: 500;
@@ -69,10 +69,10 @@
   letter-spacing: 0em;
 }
 
-.answer-content span {
+.answer_card-answer-content span {
   font-weight: 700;
 }
-.answer-card-footer {
+.answer_card-footer {
   font-family: "Poppins", sans-serif;
   font-size: 20px;
   font-weight: 500;
@@ -87,16 +87,16 @@
   left: 32px;
 }
 
-.answer-card-footer span {
+.answer_card-footer span {
   display: flex;
   align-items: center;
 }
 
-.answer-card-footer span img {
+.answer_card-footer span img {
   margin-right: 6px;
 }
 
-.answer-card-footer span input {
+.answer_card-footer span input {
   width: 478px;
   height: 14px;
   padding: 10px;
@@ -110,7 +110,7 @@
   letter-spacing: 0em;
 }
 
-.answer-card-footer button {
+.answer_card-footer button {
   width: 76px;
   height: 34px;
   padding: 4px 16px;

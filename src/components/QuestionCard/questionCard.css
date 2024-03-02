@@ -9,19 +9,18 @@
   background-color: #f8f8f8;
 }
 
-.question-tags {
+.question_card-question-tags {
   display: flex;
   justify-content: space-between;
-
   align-items: center;
 }
 
-.question-tags-text span {
+.question_card-question-tags-text span {
   background-color: #a9d9ff;
   border-radius: 6px;
   padding: 0.5rem 1rem;
-  display: inline-block; /* Ensure span is treated as a block-level element */
-  margin-right: 2rem; /* Adjust as needed */
+  display: inline-block;
+  margin-right: 2rem;
   font-family: "Inter", sans-serif;
   font-size: 20px;
   font-weight: 500;
@@ -29,7 +28,7 @@
   letter-spacing: 0em;
 }
 
-.question-tags-img {
+.question_card-question-tags-img {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,12 +39,12 @@
   letter-spacing: 0em;
 }
 
-.question-tags-img img {
+.question_card-question-tags-img img {
   height: 45px;
   width: 45px;
 }
 
-.question {
+.question_card-question {
   font-family: 'Poppins', sans-serif;
   font-size: 20px;
   font-weight: 500;
@@ -53,7 +52,7 @@
   letter-spacing: 0em;
 }
 
-.question-description {
+.question_card-question-description {
   font-family: 'Poppins', sans-serif;
   font-size: 18px;
   font-weight: 400;
@@ -61,7 +60,7 @@
   letter-spacing: 0em;
 }
 
-.question-card-footer {
+.question_card-footer {
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
   font-weight: 500;
@@ -76,11 +75,11 @@
   left: 32px;
 }
 
-.question-card-footer span {
+.question_card-footer span {
     display: flex; 
     align-items: center; 
 }
 
-.question-card-footer span img {
+.question_card-footer span img {
     margin-right: 6px; 
 }

@@ -3,9 +3,11 @@
   bottom: 32px;
   right: 32px;
   width: fit-content;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
-.floating-action-button {
+.FAB-floating-action-button {
   z-index: 1000;
   display: flex;
   flex-direction: column-reverse;
@@ -13,11 +15,11 @@
   gap: 18px;
 }
 
-.floating-action-button.row {
+.FAB-floating-action-button.FAB-row {
   flex-direction: row-reverse;
 }
 
-.action-button {
+.FAB-action-button {
   background-color: white;
   width: 60px;
   height: 60px;
@@ -30,7 +32,15 @@
   cursor: pointer;
 }
 
-.button-label {
+.FAB-action-button.FAB-active {
+  width: 65px;
+  height: 65px;
+  border-radius: 100%;
+  border: 1px solid white;
+  background-clip: content-box;
+}
+
+.FAB-button-label {
   background-color: #f8f8f8;
   font-family: Poppins;
   font-size: 18px;
@@ -48,32 +58,29 @@
   display: none;
 }
 
-.button-label.visible{
+.FAB-button-label.FAB-visible{
   display: inline-block;
 }
 
-.floating-button-options {
+.FAB-floating-button-options {
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-end;
   animation-name: fadeIn;
-  animation-duration: 0.5s;
+  animation-duration: 0.FAB-5s;
   gap: 18px;
 }
 
-.floating-button-options.row{
-  flex-direction: row;
+.FAB-floating-button-options.FAB-row{
+  flex-direction: row-reverse;
 }
 
-.floating-button-options.visible {
+.FAB-floating-button-options.FAB-visible {
   display: flex;
 }
 
 
-.active-card {
-  position: absolute;
-  right: 20px;
-  bottom: 65px;
+.FAB-active-card {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -88,4 +95,46 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+
+@media only screen and (max-width: 768px) {
+
+  .FAB-container {
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .FAB-floating-action-button {
+    
+  }
+
+  .FAB-floating-action-button.FAB-row {
+    
+  }
+
+  .FAB-action-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .FAB-action-button.FAB-active {
+    width: 42px;
+    height: 42px;
+  }
+  
+  .FAB-button-label {
+    font-size: 12px;
+  }
+
+  .FAB-floating-button-options {
+    gap: 12px;
+  }
+
+  .FAB-active-card {
+    width: 100%;
+  }
+
 }

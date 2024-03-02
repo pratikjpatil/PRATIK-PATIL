@@ -1,8 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./fabCards.css";
 
-function ReportIssue() {
+function ReportIssue({ data, setData }) {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isdataValid, setIsdataValid] = useState(true);
+
+  const isLoggedIn = false;
+
+  useEffect(()=>{
+    const allValuesNotEmpty = Object.values(data).every((value) => value !== '');
+    setIsdataValid(allValuesNotEmpty);
+  },[data]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -18,44 +26,54 @@ function ReportIssue() {
   const clearSelectedImage = () => {
     setSelectedImage(null);
   };
-  const isLoggedIn = false;
+
+  const handleDataChange = (e) => {
+    const { name, value } = e.target;
+    setData((prev) => ({ ...prev, [name]: value }));
+  };
+
   return (
-    <div className="card-container">
-      <div className="card-title">
+    <div className="fab_cards-card-container">
+      <div className="fab_cards-card-title">
         <h4>
           Let us know about the <span>Issue</span> you are facing right now!
         </h4>
       </div>
-      <form className="action-card-form" action="">
+      <form className="fab_cards-form" action="">
         <span>
-          <label className="action-card-input-label" htmlFor="email">
+          <label className="fab_cards-input-label" htmlFor="section-select">
             Choose a section
           </label>
           <select
-            name="section-select"
+            name="selectSection"
             id="section-select"
-            className="action-card-input"
+            className="fab_cards-input"
+            style={{ paddingBottom: "0", paddingTop: "0" }}
+            value={data.selectSection}
+            onChange={handleDataChange}
           >
             <option value="interview-questions">Interview Questions</option>
           </select>
         </span>
         <div>
-          <label className="action-card-input-label" htmlFor="email">
+          <label className="fab_cards-input-label" htmlFor="">
             Describe the issue in detail
-            <span className="required-field">*</span>
+            <span className="fab_cards-required-field">*</span>
           </label>
-          <div className="action-card-query-box">
+          <div className="fab_cards-query-box">
             <textarea
-              className="action-card-input query-input"
+              className="fab_cards-input query-input"
               style={{ border: "none" }}
               name="query"
               placeholder="Write here..."
               required
               rows="4"
+              value={data.query}
+              onChange={handleDataChange}
             ></textarea>
 
-            <div className="file-attach">
-              <label htmlFor="file-input" className="file-attach-button">
+            <div className="fab_cards-file-attach">
+              <label htmlFor="file-input" className="fab_cards-file-attach-button">
                 <svg
                   style={{ marginRight: "5px" }}
                   width="11"
@@ -78,14 +96,14 @@ function ReportIssue() {
                 />
               </label>
               {selectedImage && (
-                <div className="selected-img-container">
+                <div className="fab_cards-selected-img-container">
                   <img
                     src={selectedImage}
                     alt="Selected"
-                    className="selected-img"
+                    className="fab_cards-selected-img"
                   />
                   <svg
-                    className="img-close-button"
+                    className="fab_cards-img-close-button"
                     onClick={clearSelectedImage}
                     width="12"
                     height="12"
@@ -108,20 +126,29 @@ function ReportIssue() {
         </div>
         {!isLoggedIn && (
           <span>
-            <label className="action-card-input-label" htmlFor="email">
+            <label className="fab_cards-input-label" htmlFor="email">
               Enter your email to receive an update
             </label>
             <input
-              className="action-card-input"
+              className="fab_cards-input"
               style={{ backgroundColor: "white" }}
               type="email"
               name="email"
+              id="email"
               placeholder="Enter your Email"
+              value={data.email}
+              onChange={handleDataChange}
             />
           </span>
         )}
 
-        <button className="action-card-submit-button" type="submit">
+        <button
+          className={`fab_cards-submit-button ${
+            isdataValid ? "submittable" : ""
+          }`}
+          type="submit"
+          disabled={!isdataValid}
+        >
           Submit
         </button>
       </form>

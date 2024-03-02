@@ -9,26 +9,70 @@ import Feedback from "../FABCards/Feedback";
 import ReportIssue from "../FABCards/ReportIssue";
 import Suggestions from "../FABCards/Suggestions";
 
+const FAB_INITIAL_CONTACT_US_DATA = {
+  name: "",
+  email: "",
+  mobileNumber: "",
+  query: "",
+};
+
+const FAB_INITIAL_FEEDBACK_DATA = {
+  query: "",
+  checkForAnonymous: false,
+  email: "",
+};
+
+const FAB_INITIAL_REPORT_ISSUE_DATA = {
+  selectSection: "interview-questions",
+  query: "",
+  email: "",
+};
+
+const FAB_INITIAL_SUGGESTIONS_DATA = {
+  selectSection: "",
+  query: "",
+  email: "",
+  mobileNumber: "",
+};
+
 function FAB() {
   const [isOpen, setOpen] = useState(false);
   const [activeCard, setActiveCard] = useState(null);
+
+  const [contactUsData, setContactUsData] = useState(
+    FAB_INITIAL_CONTACT_US_DATA
+  );
+  const [feedbackData, setFeedbackData] = useState(FAB_INITIAL_FEEDBACK_DATA);
+  const [reportIssueData, setReportIssueData] = useState(
+    FAB_INITIAL_REPORT_ISSUE_DATA
+  );
+  const [suggestionsData, setSuggestionsData] = useState(
+    FAB_INITIAL_SUGGESTIONS_DATA
+  );
 
   const openCard = (cardName) => {
     setActiveCard(cardName);
   };
 
+  const toggleOpen = () => {
+    isOpen && setActiveCard(null);
+    setOpen((prev) => !prev);
+    if (!isOpen) {
+      setContactUsData(FAB_INITIAL_CONTACT_US_DATA);
+      setFeedbackData(FAB_INITIAL_FEEDBACK_DATA);
+      setReportIssueData(FAB_INITIAL_REPORT_ISSUE_DATA);
+      setSuggestionsData(FAB_INITIAL_SUGGESTIONS_DATA);
+    }
+  };
+
   return (
     <div className="FAB-container">
-      <div className={`floating-action-button ${activeCard ? "row" : ""}`}>
+      <div className={`FAB-floating-action-button ${activeCard ? "FAB-row" : ""}`}>
         <span>
           <button
-            className="action-button main-fab-button"
-            onClick={() => {
-              setOpen((prev) => !prev);
-              isOpen && setActiveCard(null);
-            }}
+            className="FAB-action-button FAB-main-fab-button"
+            onClick={toggleOpen}
           >
-            {/* <img src={FABICON} alt="fab" /> */}
             {!isOpen ? (
               <svg
                 width="32"
@@ -100,42 +144,58 @@ function FAB() {
           </button>
         </span>
         {isOpen && (
-          <div className={`floating-button-options ${activeCard ? "row" : ""}`}>
+          <div className={`FAB-floating-button-options ${activeCard ? "FAB-row" : ""}`}>
             <span
-              className="action-button-main"
+              className="FAB-action-button-main"
               onClick={() => openCard("contact")}
             >
-              <span className={`button-label ${!activeCard ? "visible" : ""}`}>
+              <span className={`FAB-button-label ${!activeCard ? "FAB-visible" : ""}`}>
                 Contact Us
               </span>
-              <button className="action-button">
+              <button
+                className={`FAB-action-button ${
+                  activeCard === "contact" ? "FAB-active" : ""
+                }`}
+              >
                 <img src={contactus} alt="" />
               </button>
             </span>
 
             <span onClick={() => openCard("suggestion")}>
-              <span className={`button-label ${!activeCard ? "visible" : ""}`}>
+              <span className={`FAB-button-label ${!activeCard ? "FAB-visible" : ""}`}>
                 Give Suggestion
               </span>
-              <button className="action-button">
+              <button
+                className={`FAB-action-button ${
+                  activeCard === "suggestion" ? "FAB-active" : ""
+                }`}
+              >
                 <img src={givesuggestion} alt="" />
               </button>
             </span>
 
             <span onClick={() => openCard("feedback")}>
-              <span className={`button-label ${!activeCard ? "visible" : ""}`}>
+              <span className={`FAB-button-label ${!activeCard ? "FAB-visible" : ""}`}>
                 Share Feedback
               </span>
-              <button className="action-button">
+              <button
+                className={`FAB-action-button ${
+                  activeCard === "feedback" ? "FAB-active" : ""
+                }`}
+              >
                 <img src={sharefeedback} alt="" />
               </button>
             </span>
 
             <span onClick={() => openCard("issue")}>
-              <span className={`button-label ${!activeCard ? "visible" : ""}`}>
+              <span className={`FAB-button-label ${!activeCard ? "FAB-visible" : ""}`}>
                 Report an issue
               </span>
-              <button className="action-button">
+              <button
+                className={`FAB-action-button ${
+                  activeCard === "issue" ? "FAB-active" : ""
+                }`}
+              >
                 <img src={reportissue} alt="" />
               </button>
             </span>
@@ -143,11 +203,19 @@ function FAB() {
         )}
       </div>
       {activeCard && (
-        <div className="active-card">
-          {activeCard === "contact" && <ContactUs />}
-          {activeCard === "suggestion" && <Suggestions />}
-          {activeCard === "feedback" && <Feedback />}
-          {activeCard === "issue" && <ReportIssue />}
+        <div className="FAB-active-card">
+          {activeCard === "contact" && (
+            <ContactUs data={contactUsData} setData={setContactUsData} />
+          )}
+          {activeCard === "suggestion" && (
+            <Suggestions data={suggestionsData} setData={setSuggestionsData} />
+          )}
+          {activeCard === "feedback" && (
+            <Feedback data={feedbackData} setData={setFeedbackData} />
+          )}
+          {activeCard === "issue" && (
+            <ReportIssue data={reportIssueData} setData={setReportIssueData} />
+          )}
         </div>
       )}
     </div>

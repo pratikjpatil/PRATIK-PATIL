@@ -6,31 +6,31 @@ import info from "../../assets/info.png";
 function QuestionCard() {
   return (
     <div className="question-card">
-      <div className="question-tags">
-        <div className="question-tags-text">
+      <div className="question_card-question-tags">
+        <div className="question_card-question-tags-text">
           <span>Design</span>
           <span>Technology</span>
         </div>
 
-        <div className="question-tags-img">
+        <div className="question_card-question-tags-img">
           <img src={startupImg} alt="startup-img" />
           <span>Startup</span>
         </div>
       </div>
 
-      <p className="question">
+      <p className="question_card-question">
         A travel startup wants Amazon to pre-install their personal travel agent
         bot on existing Amazon Echos. What is the value of the partnership to
         the travel startup?{" "}
       </p>
 
-      <p className="question-description">
+      <p className="question_card-question-description">
         Lorem ipsum dolor sit amet consectetur. Orci elementum aliquet nec
         viverra tincidunt ? Amet ullamcorper velit tristique scelerisque donec
         sed viverra arcu. Amet arcu vitae sit scelerisque ultrices magna cursus
         se?
       </p>
-      <div className="question-card-footer">
+      <div className="question_card-footer">
         <span>
           <img src={views} alt="views" />
           100 Views

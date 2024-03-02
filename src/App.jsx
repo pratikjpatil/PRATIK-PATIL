@@ -1,10 +1,11 @@
 import QuestionPage from './pages/QuestionPage/QuestionPage'
+import MobileQuestionsPage from './pages/MobileQuestionsPage/MobileQuestionsPage'
 
 function App() {
 
   return (
     <>
-      <QuestionPage/>
+    {window.innerWidth >= 768 ? <QuestionPage/> : <MobileQuestionsPage/>}
     </>
   )
 }
