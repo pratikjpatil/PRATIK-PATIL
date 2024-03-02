@@ -1,51 +1,138 @@
 import { useState } from "react";
 import "./fab.css";
-import FABICON from "../../assets/FAB.png";
 import givesuggestion from "../../assets/givesuggestion.png";
 import sharefeedback from "../../assets/sharefeedback.png";
 import reportissue from "../../assets/reportissue.png";
 import contactus from "../../assets/contactus.png";
+import ContactUs from "../FABCards/ContactUs";
+import Feedback from "../FABCards/Feedback";
+import ReportIssue from "../FABCards/ReportIssue";
+import Suggestions from "../FABCards/Suggestions";
 
 function FAB() {
   const [isOpen, setOpen] = useState(false);
+  const [activeCard, setActiveCard] = useState(null);
+
+  const openCard = (cardName) => {
+    setActiveCard(cardName);
+  };
+
 
   return (
-    <div className="floating-action-button">
-      <span>
-        <button onClick={()=>setOpen((prev)=>!prev)}>
-          <img src={FABICON} alt="fab" />
-        </button>
-      </span>
-      {isOpen && (
-        <>
-          <span>
-            <span>Contact Us</span>
-            <button>
-              <img src={contactus} alt="" />
-            </button>
-          </span>
+    <div className="FAB-container">
+      <div className={`floating-action-button ${activeCard?'row':''}`}>
+        <span>
+          <button className="action-button main-fab-button" onClick={() => {setOpen((prev)=>!prev); isOpen&&setActiveCard(null)}}>
+            {/* <img src={FABICON} alt="fab" /> */}
+            {!isOpen ? (
+              <svg
+                width="32"
+                height="34"
+                viewBox="0 0 32 34"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clipPath="url(#clip0_2524_6396)">
+                  <path
+                    d="M19.7452 0H2.32296C1.04002 0 0 1.04002 0 2.32296V27.8755C0 29.1584 1.04002 30.1984 2.32296 30.1984H19.7452C21.0281 30.1984 22.0682 29.1584 22.0682 27.8755V2.32296C22.0682 1.04002 21.0281 0 19.7452 0Z"
+                    fill="#0F0F0F"
+                  />
+                  <path
+                    d="M3.48444 6.96924L17.4222 6.96924"
+                    stroke="#F8F8F8"
+                    strokeWidth="1.74222"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M3.48444 11.6147L17.4222 11.6147"
+                    stroke="#F8F8F8"
+                    strokeWidth="1.74222"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M3.48444 16.2607L17.4222 16.2607"
+                    stroke="#F8F8F8"
+                    strokeWidth="1.74222"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M3.48444 20.9067H10.4533"
+                    stroke="#F8F8F8"
+                    strokeWidth="1.74222"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M25.2995 13.6118L16.5793 28.7155L16.9482 33.0538C17.0167 33.8594 17.8669 34.3503 18.5989 34.0068L22.5404 32.1571L31.2606 17.0535C31.902 15.9424 31.5214 14.5217 30.4103 13.8803L28.4727 12.7616C27.3616 12.1201 25.9409 12.5008 25.2995 13.6118Z"
+                    fill="#0F0F0F"
+                    stroke="#F8F8F8"
+                    strokeWidth="1.16148"
+                    strokeLinecap="round"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_2524_6396">
+                    <rect width="32" height="34" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+            ) : (
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1.99976 2.00122L21.9998 22.0006M1.99976 22.0006L21.9998 2.00122"
+                  stroke="#0F0F0F"
+                  strokeWidth="3.99994"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            )}
+          </button>
+        </span>
+        {isOpen && (
+          <div className={`floating-button-options ${activeCard?'row':''}`}>
+            <span className="action-button-main">
+              <span className={`button-label ${!activeCard ? "visible" : ""}`}>Contact Us</span>
+              <button className="action-button" onClick={() => openCard("contact")}>
+                <img src={contactus} alt="" />
+              </button>
+            </span>
 
-          <span>
-            <span>Give Suggestion</span>
-            <button>
-              <img src={givesuggestion} alt="" />
-            </button>
-          </span>
+            <span>
+              <span className={`button-label ${!activeCard ? "visible" : ""}`}>Give Suggestion</span>
+              <button className="action-button" onClick={() => openCard("suggestion")}>
+                <img src={givesuggestion} alt="" />
+              </button>
+            </span>
 
-          <span>
-            <span>Share Feedback</span>
-            <button>
-              <img src={sharefeedback} alt="" />
-            </button>
-          </span>
+            <span>
+              <span className={`button-label ${!activeCard ? "visible" : ""}`}>Share Feedback</span>
+              <button className="action-button" onClick={() => openCard("feedback")}>
+                <img src={sharefeedback} alt="" />
+              </button>
+            </span>
 
-          <span>
-            <span>Report an issue</span>
-            <button>
-              <img src={reportissue} alt="" />
-            </button>
-          </span>
-        </>
+            <span>
+              <span className={`button-label ${!activeCard ? "visible" : ""}`}>Report an issue</span>
+              <button className="action-button" onClick={() => openCard("issue")}>
+                <img src={reportissue} alt="" />
+              </button>
+            </span>
+          </div>
+        )}
+      </div>
+      {activeCard && (
+        <div className="active-card">
+          {activeCard === "contact" && <ContactUs />}
+          {activeCard === "suggestion" && <Suggestions />}
+          {activeCard === "feedback" && <Feedback />}
+          {activeCard === "issue" && <ReportIssue />}
+        </div>
       )}
     </div>
   );
