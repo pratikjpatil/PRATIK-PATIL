@@ -17,12 +17,17 @@ function FAB() {
     setActiveCard(cardName);
   };
 
-
   return (
     <div className="FAB-container">
-      <div className={`floating-action-button ${activeCard?'row':''}`}>
+      <div className={`floating-action-button ${activeCard ? "row" : ""}`}>
         <span>
-          <button className="action-button main-fab-button" onClick={() => {setOpen((prev)=>!prev); isOpen&&setActiveCard(null)}}>
+          <button
+            className="action-button main-fab-button"
+            onClick={() => {
+              setOpen((prev) => !prev);
+              isOpen && setActiveCard(null);
+            }}
+          >
             {/* <img src={FABICON} alt="fab" /> */}
             {!isOpen ? (
               <svg
@@ -95,31 +100,42 @@ function FAB() {
           </button>
         </span>
         {isOpen && (
-          <div className={`floating-button-options ${activeCard?'row':''}`}>
-            <span className="action-button-main">
-              <span className={`button-label ${!activeCard ? "visible" : ""}`}>Contact Us</span>
-              <button className="action-button" onClick={() => openCard("contact")}>
+          <div className={`floating-button-options ${activeCard ? "row" : ""}`}>
+            <span
+              className="action-button-main"
+              onClick={() => openCard("contact")}
+            >
+              <span className={`button-label ${!activeCard ? "visible" : ""}`}>
+                Contact Us
+              </span>
+              <button className="action-button">
                 <img src={contactus} alt="" />
               </button>
             </span>
 
-            <span>
-              <span className={`button-label ${!activeCard ? "visible" : ""}`}>Give Suggestion</span>
-              <button className="action-button" onClick={() => openCard("suggestion")}>
+            <span onClick={() => openCard("suggestion")}>
+              <span className={`button-label ${!activeCard ? "visible" : ""}`}>
+                Give Suggestion
+              </span>
+              <button className="action-button">
                 <img src={givesuggestion} alt="" />
               </button>
             </span>
 
-            <span>
-              <span className={`button-label ${!activeCard ? "visible" : ""}`}>Share Feedback</span>
-              <button className="action-button" onClick={() => openCard("feedback")}>
+            <span onClick={() => openCard("feedback")}>
+              <span className={`button-label ${!activeCard ? "visible" : ""}`}>
+                Share Feedback
+              </span>
+              <button className="action-button">
                 <img src={sharefeedback} alt="" />
               </button>
             </span>
 
-            <span>
-              <span className={`button-label ${!activeCard ? "visible" : ""}`}>Report an issue</span>
-              <button className="action-button" onClick={() => openCard("issue")}>
+            <span onClick={() => openCard("issue")}>
+              <span className={`button-label ${!activeCard ? "visible" : ""}`}>
+                Report an issue
+              </span>
+              <button className="action-button">
                 <img src={reportissue} alt="" />
               </button>
             </span>
