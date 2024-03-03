@@ -1,30 +1,41 @@
 import { useState, useEffect } from "react";
 import "./fabCards.css";
 
-function ReportIssue({ data, setData }) {
-  const [selectedImage, setSelectedImage] = useState(null);
+function ReportIssue({ data, setData, handleSubmit}) {
+  const [selectedImages, setSelectedImages] = useState(null);
   const [isdataValid, setIsdataValid] = useState(true);
 
   const isLoggedIn = false;
 
   useEffect(()=>{
-    const allValuesNotEmpty = Object.values(data).every((value) => value !== '');
+    const {email, ...requiredData} = data;
+    const allValuesNotEmpty = Object.values(requiredData).every((value) => value !== '');
     setIsdataValid(allValuesNotEmpty);
   },[data]);
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length > 2) {
+      alert("You can only attach up to two images.");
+      return;
+    }
+  
+    const selectedImagesArray = [];
+  
+    files.forEach((file) => {
       const reader = new FileReader();
       reader.onload = () => {
-        setSelectedImage(reader.result);
+        selectedImagesArray.push(reader.result);
+        if (selectedImagesArray.length === files.length) {
+          setSelectedImages(selectedImagesArray);
+        }
       };
       reader.readAsDataURL(file);
-    }
+    });
   };
-
-  const clearSelectedImage = () => {
-    setSelectedImage(null);
+  const clearSelectedImage = (index) => {
+    const updatedImages = selectedImages.filter((_, i) => i !== index);
+    setSelectedImages(updatedImages);
   };
 
   const handleDataChange = (e) => {
@@ -39,7 +50,7 @@ function ReportIssue({ data, setData }) {
           Let us know about the <span>Issue</span> you are facing right now!
         </h4>
       </div>
-      <form className="fab_cards-form" action="">
+      <form className="fab_cards-form" onSubmit={(e)=>handleSubmit(e, "issue")}>
         <span>
           <label className="fab_cards-input-label" htmlFor="section-select">
             Choose a section
@@ -68,6 +79,7 @@ function ReportIssue({ data, setData }) {
               placeholder="Write here..."
               required
               rows="4"
+              maxLength={1000}
               value={data.query}
               onChange={handleDataChange}
             ></textarea>
@@ -95,32 +107,34 @@ function ReportIssue({ data, setData }) {
                   onChange={handleFileChange}
                 />
               </label>
-              {selectedImage && (
-                <div className="fab_cards-selected-img-container">
-                  <img
-                    src={selectedImage}
-                    alt="Selected"
-                    className="fab_cards-selected-img"
-                  />
-                  <svg
-                    className="fab_cards-img-close-button"
-                    onClick={clearSelectedImage}
-                    width="12"
-                    height="12"
-                    viewBox="0 0 10 10"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M1.66675 1.66675L8.33341 8.33341M1.66675 8.33341L8.33341 1.66675"
-                      stroke="white"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+              <div className="fab_cards-selected-images">
+                {selectedImages&&selectedImages.map((image, index) => (
+                  <div key={index} className="fab_cards-selected-img-container">
+                    <img
+                      src={image}
+                      alt={`Selected ${index + 1}`}
+                      className="fab_cards-selected-img"
                     />
-                  </svg>
-                </div>
-              )}
+                    <svg
+                      className="fab_cards-img-close-button"
+                      onClick={() => clearSelectedImage(index)}
+                      width="12"
+                      height="12"
+                      viewBox="0 0 10 10"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M1.66675 1.66675L8.33341 8.33341M1.66675 8.33341L8.33341 1.66675"
+                        stroke="white"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -144,7 +158,7 @@ function ReportIssue({ data, setData }) {
 
         <button
           className={`fab_cards-submit-button ${
-            isdataValid ? "submittable" : ""
+            isdataValid ? "fab_cards-submittable" : ""
           }`}
           type="submit"
           disabled={!isdataValid}

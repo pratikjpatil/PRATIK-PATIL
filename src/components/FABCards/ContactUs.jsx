@@ -1,14 +1,24 @@
 import { useState, useEffect } from "react";
 import "./fabCards.css";
 
-function ContactUs({ data, setData }) {
+function ContactUs({ data, setData, handleSubmit}) {
   const [isdataValid, setIsdataValid] = useState(true);
 
   const isLoggedIn = false;
 
   useEffect(()=>{
-    const allValuesNotEmpty = Object.values(data).every((value) => value !== '');
-    setIsdataValid(allValuesNotEmpty);
+    const {mobileNumber, email, ...requiredData} = data;
+    const allValuesNotEmpty = Object.values(requiredData).every((value) => value !== '');
+    if(isLoggedIn && allValuesNotEmpty){
+      setIsdataValid(true);
+    }
+    else if(!isLoggedIn && (data.email!=="" && allValuesNotEmpty)){
+      setIsdataValid(true);
+    }
+    else{
+      setIsdataValid(false);
+    }
+    
   },[data])
 
   const handledataChange = (e) => {
@@ -24,7 +34,7 @@ function ContactUs({ data, setData }) {
           Get in <span>Contact with us</span> for your queries!
         </h4>
       </div>
-      <form className="fab_cards-form" action="">
+      <form className="fab_cards-form" onSubmit={(e)=>handleSubmit(e, "contact")}>
         <span>
           <label className="fab_cards-input-label" htmlFor="name">
             Your Name<span className="fab_cards-required-field">*</span>
@@ -73,7 +83,7 @@ function ContactUs({ data, setData }) {
 
         <span>
           <label className="fab_cards-input-label" htmlFor="query">
-            What would you like to ask?{" "}
+            What would you like to ask?
             <span className="fab_cards-required-field">*</span>
           </label>
           <textarea
@@ -82,12 +92,13 @@ function ContactUs({ data, setData }) {
             placeholder="Write here..."
             required
             rows="4"
+            maxLength={1000}
             value={data.query}
             onChange={handledataChange}
           ></textarea>
         </span>
         <button
-          className={`fab_cards-submit-button ${isdataValid ? 'submittable' : ''}`}
+          className={`fab_cards-submit-button ${isdataValid ? 'fab_cards-submittable' : ''}`}
           type="submit"
           disabled={!isdataValid}
         >

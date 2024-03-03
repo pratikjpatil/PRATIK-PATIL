@@ -198,6 +198,7 @@ function MobileQuestionsPage() {
           </div>
         </div>
       </section>
+      {/* have made the options configurable pass option name and false in props */}
       <FAB/>
     </>
   );

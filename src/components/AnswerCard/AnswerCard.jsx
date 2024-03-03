@@ -1,26 +1,23 @@
-import './answerCard.css'
-import like from '../../assets/like.png'
-import comment from '../../assets/comment.png'
-import profile from '../../assets/profile.png'
-import edit from '../../assets/edit.png'
+import "./answerCard.css";
+import like from "../../assets/like.png";
+import comment from "../../assets/comment.png";
+import profile from "../../assets/profile.png";
+import edit from "../../assets/edit.png";
 
 function AnswerCard() {
-
   return (
     <div className="answer-card">
-
       <div className="answer_card-header">
         <div className="answer_card-user-profile">
           <img src={profile} alt="profile" />
           <div>
             <span>
-                <span className='answer_card-user-name'>Neha Bhat</span>
-               (You)  
+              <span className="answer_card-user-name">Neha Bhat</span>
+              (You)
             </span>
-            
-            <span>Jun 27, 2023</span>
-           </div>
 
+            <span>Jun 27, 2023</span>
+          </div>
         </div>
 
         <div className="answer_card-edit-button">
@@ -29,11 +26,14 @@ function AnswerCard() {
         </div>
       </div>
 
-
-
       <p className="answer_card-answer-content">
-      Lorem ipsum dolor sit amet consectetur. Elit et ut at vestibulum enim ornare feugi vitae. Eget proin aliquam blandit eget vitae erat fermentum lacus. Dignissim done mi vel fermentum. Id ultrices risus sit pel sit elit morbi. Mi sed mauris aenean odio egestas ullamcorper. Dignissim in vel fusce id. Sit blandit diam ridiculus ipsum interdum ut velit quam. Bibendum amet mi.... 
-      <span>Show more</span>
+        Lorem ipsum dolor sit amet consectetur. Elit et ut at vestibulum enim
+        ornare feugi vitae. Eget proin aliquam blandit eget vitae erat fermentum
+        lacus. Dignissim done mi vel fermentum. Id ultrices risus sit pel sit
+        elit morbi. Mi sed mauris aenean odio egestas ullamcorper. Dignissim in
+        vel fusce id. Sit blandit diam ridiculus ipsum interdum ut velit quam.
+        Bibendum amet mi....
+        <span>Show more</span>
       </p>
 
       <div className="answer_card-footer">
@@ -43,7 +43,12 @@ function AnswerCard() {
         </span>
         <span>
           <img src={comment} alt="comment" />
-          <input type="text" name="comment" placeholder='Add a comment' className='answer_card-comment-input'/>
+          <input
+            type="text"
+            name="comment"
+            placeholder="Add a comment"
+            className="answer_card-comment-input"
+          />
         </span>
         <button>Post</button>
       </div>
@@ -51,5 +56,4 @@ function AnswerCard() {
   );
 }
 
-
-export default AnswerCard
+export default AnswerCard;

@@ -1,34 +1,49 @@
 import { useState, useEffect } from "react";
 import "./fabCards.css";
 
-function Suggestions({ data, setData }) {
-  const [selectedImage, setSelectedImage] = useState(null);
+function Suggestions({ data, setData, handleSubmit }) {
+  const [selectedImages, setSelectedImages] = useState([]);
   const [emailError, setEmailError] = useState(false);
   const [isdataValid, setIsdataValid] = useState(true);
 
-  const isLoggedIn = false;
+  const isLoggedIn = true;
 
-  useEffect(()=>{
-    const allValuesNotEmpty = Object.values(data).every((value) => value !== '');
-    setIsdataValid(allValuesNotEmpty);
-  },[data])
+  useEffect(() => {
+    if (data.query !== "") {
+      setIsdataValid(true);
+    } else {
+      setIsdataValid(false);
+    }
+  }, [data]);
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length > 2) {
+      alert("You can only attach up to two images.");
+      return;
+    }
+
+    const selectedImagesArray = [];
+
+    files.forEach((file) => {
       const reader = new FileReader();
       reader.onload = () => {
-        setSelectedImage(reader.result);
+        selectedImagesArray.push(reader.result);
+        if (selectedImagesArray.length === files.length) {
+          setSelectedImages(selectedImagesArray);
+        }
       };
       reader.readAsDataURL(file);
-    }
+    });
   };
 
-  const clearSelectedImage = () => {
-    setSelectedImage(null);
+  const clearSelectedImage = (index) => {
+    const updatedImages = selectedImages.filter((_, i) => i !== index);
+    setSelectedImages(updatedImages);
   };
 
   const handleEmailChange = (e) => {
+    handleDataChange(e);
     if (!e.target.checkValidity()) {
       setEmailError(true);
       return;
@@ -49,7 +64,7 @@ function Suggestions({ data, setData }) {
           rewards!
         </h4>
       </div>
-      <form className="fab_cards-form" action="">
+      <form className="fab_cards-form" onSubmit={(e)=>handleSubmit(e, "suggestion")}>
         <span>
           <label className="fab_cards-input-label" htmlFor="">
             Choose a section
@@ -78,12 +93,16 @@ function Suggestions({ data, setData }) {
               placeholder="Write here..."
               required
               rows="4"
+              maxLength={1000}
               value={data.query}
               onChange={handleDataChange}
             ></textarea>
 
             <div className="fab_cards-file-attach">
-              <label htmlFor="file-input" className="fab_cards-file-attach-button">
+              <label
+                htmlFor="file-input"
+                className="fab_cards-file-attach-button"
+              >
                 <svg
                   style={{ marginRight: "5px" }}
                   width="11"
@@ -103,34 +122,38 @@ function Suggestions({ data, setData }) {
                   id="file-input"
                   style={{ display: "none" }}
                   onChange={handleFileChange}
+                  disabled={selectedImages.length >= 2}
+                  multiple
                 />
               </label>
-              {selectedImage && (
-                <div className="fab_cards-selected-img-container">
-                  <img
-                    src={selectedImage}
-                    alt="Selected"
-                    className="fab_cards-selected-img"
-                  />
-                  <svg
-                    className="fab_cards-img-close-button"
-                    onClick={clearSelectedImage}
-                    width="12"
-                    height="12"
-                    viewBox="0 0 10 10"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M1.66675 1.66675L8.33341 8.33341M1.66675 8.33341L8.33341 1.66675"
-                      stroke="white"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+              <div className="fab_cards-selected-images">
+                {selectedImages&&selectedImages.map((image, index) => (
+                  <div key={index} className="fab_cards-selected-img-container">
+                    <img
+                      src={image}
+                      alt={`Selected ${index + 1}`}
+                      className="fab_cards-selected-img"
                     />
-                  </svg>
-                </div>
-              )}
+                    <svg
+                      className="fab_cards-img-close-button"
+                      onClick={() => clearSelectedImage(index)}
+                      width="12"
+                      height="12"
+                      viewBox="0 0 10 10"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M1.66675 1.66675L8.33341 8.33341M1.66675 8.33341L8.33341 1.66675"
+                        stroke="white"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -149,7 +172,10 @@ function Suggestions({ data, setData }) {
               value={data.email}
             />
             {emailError && (
-              <span className="fab_cards-required-field" style={{ fontSize: "16px" }}>
+              <span
+                className="fab_cards-required-field"
+                style={{ fontSize: "16px" }}
+              >
                 invalid email
               </span>
             )}
@@ -158,7 +184,7 @@ function Suggestions({ data, setData }) {
 
         <button
           className={`fab_cards-submit-button ${
-            isdataValid ? "submittable" : ""
+            isdataValid ? "fab_cards-submittable" : ""
           }`}
           type="submit"
           disabled={!isdataValid}
