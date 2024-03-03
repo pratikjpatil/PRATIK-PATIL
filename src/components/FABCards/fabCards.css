@@ -4,6 +4,7 @@
   border-radius: 8px;
   gap: 32px;
   width: 398px;
+  z-index: 101;
 }
 
 .fab_cards-card-title {
