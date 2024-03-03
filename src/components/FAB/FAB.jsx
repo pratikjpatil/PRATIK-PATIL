@@ -44,7 +44,7 @@ function FAB({
   const [activeCard, setActiveCard] = useState(null);
   const [thanksMessage, setThanksMessage] = useState("");
   const [showThanksMessage, setShowThanksMessage] = useState(false);
-  const [overlay, setOverlay] = useState(false)
+  const [overlay, setOverlay] = useState(false);
 
   const [contactUsData, setContactUsData] = useState(
     FAB_INITIAL_CONTACT_US_DATA
@@ -67,20 +67,20 @@ function FAB({
     }
   }, [showThanksMessage]);
 
-  useEffect(()=>{
+  useEffect(() => {
     setOverlay(window.innerWidth < 768 && (isOpen || showThanksMessage));
-  },[isOpen, showThanksMessage])
+  }, [isOpen, showThanksMessage]);
 
   const openCard = (cardName) => {
     setActiveCard(cardName);
   };
 
-  const clearAllData = ()=>{
+  const clearAllData = () => {
     setContactUsData(FAB_INITIAL_CONTACT_US_DATA);
     setFeedbackData(FAB_INITIAL_FEEDBACK_DATA);
     setReportIssueData(FAB_INITIAL_REPORT_ISSUE_DATA);
     setSuggestionsData(FAB_INITIAL_SUGGESTIONS_DATA);
-  }
+  };
 
   const toggleOpen = () => {
     isOpen && setActiveCard(null);
@@ -90,7 +90,6 @@ function FAB({
     }
   };
 
-  
   const handleSubmit = (e, component) => {
     e.preventDefault();
     setOpen(false);
@@ -109,7 +108,7 @@ function FAB({
     setShowThanksMessage(true);
   };
   return (
-    <div className={overlay ? "FAB-overlay" : ""}>
+    <div className={overlay ? "FAB-overlay" : ""} style={{ zIndex: 1001 }}>
       <div className="FAB-container">
         <div
           className={`FAB-floating-action-button ${
@@ -117,10 +116,7 @@ function FAB({
           }`}
         >
           <span>
-            <button
-              className="FAB-action-button"
-              onClick={toggleOpen}
-            >
+            <button className="FAB-action-button" onClick={toggleOpen}>
               {!isOpen ? (
                 <svg
                   width="32"
