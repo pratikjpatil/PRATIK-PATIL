@@ -62,7 +62,7 @@ function ReportIssue({ data, setData }) {
           </label>
           <div className="fab_cards-query-box">
             <textarea
-              className="fab_cards-input query-input"
+              className="fab_cards-input fab_cards-query-input"
               style={{ border: "none" }}
               name="query"
               placeholder="Write here..."

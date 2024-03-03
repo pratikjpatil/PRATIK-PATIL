@@ -65,7 +65,10 @@ function FAB() {
     }
   };
 
+  const isMobileAndOpen = window.innerWidth < 768  && isOpen;
+
   return (
+    <div className={isMobileAndOpen ? "FAB-overlay" : ""}>
     <div className="FAB-container">
       <div className={`FAB-floating-action-button ${activeCard ? "FAB-row" : ""}`}>
         <span>
@@ -218,6 +221,7 @@ function FAB() {
           )}
         </div>
       )}
+    </div>
     </div>
   );
 }

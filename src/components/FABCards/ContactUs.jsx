@@ -77,7 +77,7 @@ function ContactUs({ data, setData }) {
             <span className="fab_cards-required-field">*</span>
           </label>
           <textarea
-            className="fab_cards-input query-input"
+            className="fab_cards-input fab_cards-query-input"
             name="query"
             placeholder="Write here..."
             required

@@ -5,6 +5,7 @@
   width: fit-content;
   display: flex;
   flex-direction: column-reverse;
+  gap: 18px;
 }
 
 .FAB-floating-action-button {
@@ -33,8 +34,8 @@
 }
 
 .FAB-action-button.FAB-active {
-  width: 65px;
-  height: 65px;
+  width: 64px;
+  height: 64px;
   border-radius: 100%;
   border: 1px solid white;
   background-clip: content-box;
@@ -67,12 +68,12 @@
   flex-direction: column-reverse;
   align-items: flex-end;
   animation-name: fadeIn;
-  animation-duration: 0.FAB-5s;
+  animation-duration: 0.5s;
   gap: 18px;
 }
 
 .FAB-floating-button-options.FAB-row{
-  flex-direction: row-reverse;
+  flex-direction: row;
 }
 
 .FAB-floating-button-options.FAB-visible {
@@ -100,29 +101,39 @@
 
 @media only screen and (max-width: 768px) {
 
+  .FAB-overlay{
+    background: #000000B2;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+
   .FAB-container {
     bottom: 0;
     right: 0;
+    /* bottom: 2rem;
+    right: 1.2rem; */
     width: 100%;
     flex-direction: column;
+    gap: 0px;
   }
 
   .FAB-floating-action-button {
-    
-  }
-
-  .FAB-floating-action-button.FAB-row {
-    
+    margin-bottom: 24px;
+    margin-right: 14px;
   }
 
   .FAB-action-button {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
   }
 
   .FAB-action-button.FAB-active {
-    width: 42px;
-    height: 42px;
+    width: 52px;
+    height: 52px;
   }
   
   .FAB-button-label {
@@ -136,5 +147,7 @@
   .FAB-active-card {
     width: 100%;
   }
+
+
 
 }
